@@ -22,12 +22,12 @@ Cuando acabes no olvides ayudarnos evaluando tu ⭐[experiencia](https://forms.o
 
 **¿La aplicación se desplegó correctamente?** 
 
-- [ ] Sí
+- [X] Sí
 - [ ] No
 
 **Captura de pantalla de la aplicación funcionando:**
 
-> _[Inserta aquí la imagen de la aplicación corriendo en /api/]_
+> ![Appfuncionando](../img/img1.png)
 
 ### 1.3. Observaciones y problemas encontrados (opcional)
 
@@ -45,54 +45,50 @@ Cuando acabes no olvides ayudarnos evaluando tu ⭐[experiencia](https://forms.o
 
 **Endpoints probados:**
 
-- [ ] `GET /api/`
-- [ ] `POST /api/shorten`
-- [ ] `GET /api/{shortCode}`
-- [ ] `GET /api/urls`
+- [X] `GET /api/`
+- [X] `POST /api/shorten`
+- [X] `GET /api/{shortCode}`
+- [X] `GET /api/urls`
 
 
 ### 2.0.2. Análisis de dos métricas relevantes
 
 #### Métrica 1
 
+![Capturamatricas](../img/img2.png)
+
 **Nombre de la métrica:**  
 ```
-
+http_server_requests_seconds_count
 ```
 
 **Tipo de métrica:** 
-- [ ] Counter
+- [X] Counter
 - [ ] Gauge 
 - [ ] Histogram 
 - [ ] Summary
 
 **Descripción de qué información aporta:**
 ```
-
-
-
+Cuenta el número total de solicitudes HTTP procesadas por el servidor.
+Permite observar el volumen de tráfico que recibe la aplicación.
 ```
 
 **Relación con otras métricas (si aplica):**
 ```
-Ejemplo: Un aumento en peticiones HTTP podría influir en el uso de CPU
-
 
 ```
 
 **¿En que escenarios puede ayudar esta métrica?**
 ```
-
-
-
+Detectar picos de tráfico.
+Evaluar la carga del sistema.
+Ver los endpoints más utilizados.
 ```
 
 **¿Qué etiquetas (labels) se utilizan para agrupar los datos?**
 ```
-Ejemplo: uri, method, status, instance, job, etc.
-
-
-
+method, uri, status, instance, job
 ```
 
 ---
@@ -101,42 +97,38 @@ Ejemplo: uri, method, status, instance, job, etc.
 
 **Nombre de la métrica:**  
 ```
-
+http_server_requests_seconds_bucket
 ```
 
 **Tipo de métrica:** 
 - [ ] Counter
 - [ ] Gauge 
-- [ ] Histogram 
+- [X] Histogram 
 - [ ] Summary
 
 **Descripción de qué información aporta:**
 ```
-
-
-
+Distribuye la duración de las solicitudes HTTP en intervalos de tiempo.
+Permite ver la latencia de los endpoints.
 ```
 
 **Relación con otras métricas (si aplica):**
 ```
-Ejemplo: Un aumento en peticiones HTTP podría influir en el uso de CPU
-
-
+Se relaciona con http_server_requests_seconds_count (cantidad de solicitudes) 
+y http_server_requests_seconds_sum (tiempo total acumulado).
+Puede correlacionarse con errores (status=500) para ver si las fallas coinciden con tiempos altos.
 ```
 
 **¿En que escenarios puede ayudar esta métrica?**
 ```
-
-
-
+Identificar problemas de rendimiento en endpoints específicos.
+Detectar latencias anómalas en horarios de alta carga.
+Evaluar la experiencia del usuario en términos de tiempo de respuesta.
 ```
 
 **¿Qué etiquetas (labels) se utilizan para agrupar los datos?**
 ```
-Ejemplo: uri, method, status, instance, job, etc.
-
-
-
+method, uri, status, instance, job
 ```
 
 ---
@@ -156,24 +148,22 @@ Ejemplo: uri, method, status, instance, job, etc.
 
 **Propósito:**
 ```
-¿Qué quieres analizar o mostrar? Menciona qué métrica(s) vas a usar
-
-
+Monitoreo del cache en memoria
 ```
 
 **Título del panel:**
 ```
-
+Memory cache
 ```
 
 **Consulta (PromQL o LogQL):**
 ```
-Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la consulta que se muestra en la caja de texto de la seccion Code.
+container_memory_cache
 
 ```
 
 **Tipo de visualización:** 
-- [ ] Time series
+- [X] Time series
 - [ ] Gauge
 - [ ] Bar chart
 - [ ] Stat
@@ -182,20 +172,16 @@ Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la 
 
 **Otros ajustes aplicados (colores, unidades, etc.) (opcional):**
 ```
-
-
+Deje las variables por defecto
 ```
 
 **Captura de pantalla:**
 
-> _[Inserta aquí la imagen del panel]_
+> ![Cache](../img/img7.png)
 
 **Análisis (2-3 frases):**
 ```
-¿Qué conclusiones o patrones observas?
-
-
-
+Observo un comportamiento estable donde cuando hago peticiones sube y vuelve a normalizarse
 ```
 
 ---
@@ -204,24 +190,21 @@ Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la 
 
 **Propósito:**
 ```
-¿Qué quieres analizar o mostrar? Menciona qué métrica(s) vas a mostrar
-
 
 ```
 
 **Título del panel:**
 ```
-
+Visualizacion de hilos
 ```
 
 **Consulta (PromQL o LogQL):**
 ```
-Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la consulta que se muestra en la caja de texto de la seccion Code.
-
+container_threads
 ```
 
 **Tipo de visualización:** 
-- [ ] Time series
+- [X] Time series
 - [ ] Gauge
 - [ ] Bar chart
 - [ ] Stat
@@ -231,18 +214,15 @@ Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la 
 **Otros ajustes aplicados (colores, unidades, etc.) (opcional):**
 ```
 
-
 ```
 
 **Captura de pantalla:**
 
-> _[Inserta aquí la imagen del panel]_
+> ![Hilo](../img/img8.png)
 
 **Análisis (2-3 frases):**
 ```
-¿Qué conclusiones o patrones observas?
-
-
+Puedo analizar el procesamiento, picos y en que actividades hay demanda, asi mismo tomas desiciones de escalado
 
 ```
 
@@ -252,9 +232,7 @@ Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la 
 
 **¿Qué otros datos te gustaría visualizar si tuvieras más información disponible?**
 ```
-
-
-
+La metrica que me gustaria ver es el trafico y cantidad de soluciones de url
 ```
 
 ---
@@ -266,28 +244,22 @@ Consejo: Si usaste la interfaz de Grafana para crear el panel, puedes copiar la 
 
 **1. Nombre de la métrica:**
 ```
-Ejemplo: url_shortener_urls_created_total
-
+url_shortener_urls_created_total
 ```
 
 **2. Tipo de métrica:**
-- [ ] Counter
+- [X] Counter
 - [ ] Gauge
 
 **3. ¿Qué comportamiento mide?**
 ```
-
-
-
+Cuenta el número total de URLs que han sido acortadas exitosamente.
 ```
 
 **4. ¿Por qué es relevante para el sistema?**
 ```
-
-
-
+Permite monitorear el uso del servicio y analizar tendencias de uso a lo largo del tiempo. Es útil para identificar picos de actividad y evaluar la carga del sistema.
 ```
-
 
 ---
 
@@ -390,14 +362,10 @@ Describe en pocas palabras el ajuste realizado.
 **¿Qué panel te resultó más útil para detectar problemas?**
 ```
 
-
-
 ```
 
 **¿Qué métrica aporta mayor valor para monitorear un sistema real?**
 ```
-
-
 
 ```
 
