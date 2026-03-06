@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: christian-romero-m-app-monitoring
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: christian-romero-m-app-monitoring
+  labels:
+    app: christian-romero-m-app-monitoring
+  namespace: christian-romero-m-app-monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: christian-romero-m-app-monitoring
+  template:
+    metadata:
+      labels:
+        app: christian-romero-m-app-monitoring
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+      - name: christian-romero-m-app-monitoring
+        image: hello-world:latest #Workflows will update this image
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: christian-romero-m-app-monitoring
+  labels:
+    app: christian-romero-m-app-monitoring
+  namespace: christian-romero-m-app-monitoring
+spec:
+  selector:
+    app: christian-romero-m-app-monitoring
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: christian-romero-m-app-monitoring-ingress
+  namespace: christian-romero-m-app-monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: christian-romero-m-app.obs-stack.eci-idp.click
+      http:
+        paths:
+          - path: /.*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: christian-romero-m-app-monitoring
+                port:
+                  number: 80
